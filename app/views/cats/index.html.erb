@@ -1,0 +1,55 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cats</h1>
+
+<div class="container-fluid">
+  <%# ransackの検索フォーム %>
+  <%= search_form_for @search, class: "form-inline" do |f| %>
+      <%# `カラム名_cont`とすることで、カラムに対してLIKEを使った曖昧一致検索ができる %>
+      
+        <div class="form-group">
+          <%= f.label :name_cont, "名前" %>
+          <%= f.search_field :name_cont, class: "form-control" %>
+        </div>
+      
+        <%# `カラム名_eq`とすることで、カラムに対して完全一致検索ができる %>
+        <div class="form-group">
+          <%= f.label :age_eq, "年齢" %>
+          <%= f.search_field :age_eq, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "検索", class: "btn btn-primary" %>
+        </div>
+      
+        <%# 検索結果と検索フォームをクリアする %>
+        <div class="form-group">
+          <%= link_to "クリア", cats_path, class: "btn btn-danger" %>
+        </div>
+      
+  <% end %>
+</div>
+
+<div style="margin-top: 10px;">
+  <%= link_to "猫の登録", new_cat_path %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">名前</th>
+      <th scope="col">年齢</th>
+  </thead>
+  <tbody>
+    <% @cats.each do |cat| %>
+    <tr>
+      <th scope="row"><%= cat.id %></th>
+      <td><%= link_to cat.name, cat_path(cat.id) %></td>
+      <td><%= cat.age %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%# ページネーション %>
+<%= paginate @cats %>

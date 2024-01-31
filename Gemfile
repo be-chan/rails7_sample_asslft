@@ -70,4 +70,10 @@ end
 
 # bootstrap
 gem 'bootstrap-sass'
-gem "sassc-rails"
+gem "sass-rails"
+
+# ページネーション
+gem "kaminari"
+
+# 検索
+gem "ransack"
