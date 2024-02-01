@@ -69,8 +69,9 @@ group :test do
 end
 
 # bootstrap
-gem 'bootstrap-sass'
-gem "sass-rails"
+gem 'bootstrap', '~> 5.3.0'
+gem 'jquery-rails'
+gem "sassc-rails"
 
 # ページネーション
 gem "kaminari"
