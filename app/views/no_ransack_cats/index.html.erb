@@ -1,0 +1,36 @@
+<p>ransackなしの検索</p>
+
+<div class="container-fluid">
+  <%= form_with model: @cat, url: no_ransack_cats_path, method: :get, class: "form-inline" do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "form-control w-50" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :age, "年齢" %>
+      <%= f.select :age, options_for_select(@ages, @cat.age), { include_blank: '選択してください' }, class: "form-select w-25" %>
+    </div>
+    <div class="form-group mt-2">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+      <%= link_to "クリア", no_ransack_cats_path(clear_search: true), class: "btn btn-danger ms-3" %>
+    </div>
+  <% end %>
+</div>
+
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">名前</th>
+      <th scope="col">年齢</th>
+  </thead>
+  <tbody>
+    <% @cats.each do |cat| %>
+      <tr>
+        <th scope="row"><%= cat.id %></th>
+        <td><%= link_to cat.name, cat_path(cat.id) %></td>
+        <td><%= cat.age %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
